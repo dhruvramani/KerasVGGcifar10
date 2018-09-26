@@ -39,7 +39,7 @@ BATCH_NORM = False
 
 batch_size = 64
 num_classes = 10
-epochs = 25
+epochs = 50
 data_augmentation = True
 
 (x_train, y_train), (x_test, y_test) = cifar10.load_data() # x_train - training data(images), y_train - labels(digits)
