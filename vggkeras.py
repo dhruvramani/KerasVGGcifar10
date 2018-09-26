@@ -176,6 +176,14 @@ cnn = cnn_n.fit(x_train, y_train, batch_size=batch_size, epochs=epochs, validati
 
 #sequential_model_to_ascii_printout(cnn_n)
 
+acc, val_acc = cnn.history['acc'], cnn.history['val_acc']
+loss, val_loss = cnn.history['loss'], cnn.history['val_loss']
+
+np.savetxt('acc.txt', acc, delimiter=' ')
+np.savetxt('val_acc.txt', val_acc, delimiter=' ')
+np.savetxt('loss.txt', loss, delimiter=' ')
+np.savetxt('val_loss.txt', val_loss, delimiter=' ')
+
 # Plots for trainng and testing process: loss and accuracy
 '''
 plt.figure(0)
