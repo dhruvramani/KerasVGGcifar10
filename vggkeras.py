@@ -1,5 +1,5 @@
 import numpy as np
-import matplotlib.pyplot as plt
+#import matplotlib.pyplot as plt
 from keras.models import Sequential
 from keras.layers import Dense
 from keras.layers import Dropout
@@ -11,7 +11,7 @@ from keras.layers.convolutional import Conv2D, MaxPooling2D, ZeroPadding2D
 from keras.layers.normalization import BatchNormalization
 from keras.initializers import glorot_normal
 from keras.utils import np_utils
-from keras_sequential_ascii import sequential_model_to_ascii_printout
+#from keras_sequential_ascii import sequential_model_to_ascii_printout
 from keras import backend as K
 if K.backend()=='tensorflow':
     K.set_image_dim_ordering("th")
@@ -20,12 +20,14 @@ if K.backend()=='tensorflow':
 import tensorflow as tf
 import multiprocessing as mp
 
+'''
 core_num = mp.cpu_count()
 print(core_num)
 config = tf.ConfigProto(
     inter_op_parallelism_threads=core_num,
     intra_op_parallelism_threads=core_num)
-sess = tf.Session(config=config)
+'''
+sess = tf.Session()#config=config)
 
 # Loading the CIFAR-10 dataset
 
@@ -48,7 +50,7 @@ print(x_test.shape[0], 'test samples')
 class_names = ['airplane','automobile','bird','cat','deer',
                'dog','frog','horse','ship','truck']
 
-
+'''
 fig = plt.figure(figsize=(8,3))
 for i in range(num_classes):
     ax = fig.add_subplot(2, 5, 1 + i, xticks=[], yticks=[])
@@ -59,7 +61,7 @@ for i in range(num_classes):
     ax.set_title(class_names[i])
     plt.imshow(im)
 plt.show()
-
+'''
 # Convert and pre-processing
 
 y_train = np_utils.to_categorical(y_train, num_classes)
@@ -172,10 +174,10 @@ cnn = cnn_n.fit(x_train, y_train, batch_size=batch_size, epochs=epochs, validati
 
 # Vizualizing model structure
 
-sequential_model_to_ascii_printout(cnn_n)
+#sequential_model_to_ascii_printout(cnn_n)
 
 # Plots for trainng and testing process: loss and accuracy
-
+'''
 plt.figure(0)
 plt.plot(cnn.history['acc'],'r')
 plt.plot(cnn.history['val_acc'],'g')
@@ -185,7 +187,6 @@ plt.xlabel("Num of Epochs")
 plt.ylabel("Accuracy")
 plt.title("Training Accuracy vs Validation Accuracy")
 plt.legend(['train','validation'])
-
 plt.figure(1)
 plt.plot(cnn.history['loss'],'r')
 plt.plot(cnn.history['val_loss'],'g')
@@ -196,11 +197,11 @@ plt.ylabel("Loss")
 plt.title("Training Loss vs Validation Loss")
 plt.legend(['train','validation'])
 plt.show()
-
+'''
 scores = cnn_n.evaluate(x_test, y_test, verbose=0)
 print("Accuracy: %.2f%%" % (scores[1]*100))
 
-
+'''
 # Confusion matrix result
 
 from sklearn.metrics import classification_report, confusion_matrix
@@ -223,3 +224,4 @@ plt.figure(figsize = (10,7))
 sn.set(font_scale=1.4)#for label size
 sn.heatmap(df_cm, annot=True,annot_kws={"size": 12})# font size
 plt.show()
+'''
